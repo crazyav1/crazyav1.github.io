@@ -1,0 +1,17 @@
+plugins {
+    id 'java'
+    id 'application'
+}
+
+group = 'com.electricity'
+version = '1.0'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'tech.tablesaw:tablesaw-core:0.44.4'
+    implementation 'org.apache.commons:commons-math4-core:4.0-beta1'
+    implementation 'org.knowm.xchart:xchart:3.8.8'
+}

@@ -1,0 +1,13 @@
+services:
+  beakerx:
+    image: beakerx/beakerx:latest
+    container_name: beakerx-java
+    ports:
+      - "8888:8888"
+    volumes:
+      - ./shared:/home/beakerx/shared
+    environment:
+      - BEAKERX_HOME=/home/beakerx
+      - NOTEBOOK_DIR=/home/beakerx/shared
+    working_dir: /home/beakerx/shared
+    command: start-notebook.sh --NotebookApp.notebook_dir=/home/beakerx/shared
