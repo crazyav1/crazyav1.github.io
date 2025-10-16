@@ -12,8 +12,10 @@ import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static org.knowm.xchart.VectorGraphicsEncoder.VectorGraphicsFormat.SVG;
 import static org.knowm.xchart.VectorGraphicsEncoder.saveVectorGraphic;
 import static org.knowm.xchart.style.Styler.ChartTheme.Matlab;
+import static org.knowm.xchart.style.markers.SeriesMarkers.NONE;
 
 
 public class Main {
@@ -52,14 +54,16 @@ public class Main {
 
         addSeries(chart, time, demand);
 
-        saveVectorGraphic(chart, "./demand-chart", VectorGraphicsEncoder.VectorGraphicsFormat.SVG);
+        saveVectorGraphic(chart, "./demand-chart", SVG);
 
         new SwingWrapper<>(chart).displayChart();
     }
 
+
+
     private static void addSeries(XYChart chart, List<Date> time, List<? extends Number> demand) {
         var series = chart.addSeries("Demand (MW)", time, demand);
-        series.setMarker(SeriesMarkers.NONE);
+        series.setMarker(NONE);
     }
 
     private static XYChart createChart() {
