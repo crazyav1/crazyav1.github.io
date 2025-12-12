@@ -2,16 +2,19 @@ package com.electricity.util;
 
 import com.electricity.models.DataRow;
 import org.knowm.xchart.SwingWrapper;
+import org.knowm.xchart.VectorGraphicsEncoder;
 import org.knowm.xchart.XYChart;
 import org.knowm.xchart.XYChartBuilder;
-import org.knowm.xchart.style.Styler;
 
 import java.awt.*;
+import java.io.IOException;
+import java.nio.file.Path;
 import java.time.OffsetDateTime;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static org.knowm.xchart.VectorGraphicsEncoder.VectorGraphicsFormat.SVG;
 import static org.knowm.xchart.style.Styler.YAxisPosition.Right;
 
 public class TimeSeriesPlotter {
@@ -39,7 +42,16 @@ public class TimeSeriesPlotter {
     styleTimeSeries(chart);
     chart.setYAxisGroupTitle(1, "Price: Euro/kWh");
     chart.getStyler().setYAxisGroupPosition(1, Right);
+    saveSvg(chart, Path.of("demand-pv.svg"));
     new SwingWrapper<>(chart).displayChart();
+  }
+
+  public static void saveSvg(XYChart chart, Path outputFile) {
+    try {
+      VectorGraphicsEncoder.saveVectorGraphic(chart, outputFile.toString(), SVG);
+    } catch (IOException e) {
+      System.out.println("Error saving SVG: " + e.getMessage());
+    }
   }
 
   private static List<Double> extractPrices(List<DataRow> rows) {
@@ -60,7 +72,7 @@ public class TimeSeriesPlotter {
     return new XYChartBuilder()
         .width(CHART_WIDTH)
         .height(CHART_HEIGHT)
-        .title("Demand and PV (first % days)".formatted(days))
+        .title("Prices, Demand and PV (first %d days)".formatted(days))
         .xAxisTitle("Time")
         .yAxisTitle("Power (kW)")
         .build();

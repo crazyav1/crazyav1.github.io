@@ -9,9 +9,6 @@ import com.electricity.util.TimeSeriesPlotter;
 import java.nio.file.Path;
 import java.util.List;
 
-import static org.knowm.xchart.VectorGraphicsEncoder.saveVectorGraphic;
-
-
 public class Main {
 
   static void main(String[] args) throws Exception {
