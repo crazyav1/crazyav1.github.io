@@ -22,4 +22,5 @@ public record DataRow(
   Double diffuseRadiation,          
   Double directNormalIrradiance,    
   double dayMax
-) {}
+) {
+}
