@@ -1,6 +1,7 @@
 package com.electricity.util;
 
 import com.electricity.config.BatterySpec;
+import com.electricity.config.Task11Config;
 import com.electricity.models.DemandForecastRow;
 import com.electricity.models.OptimisationRow;
 import org.ojalgo.optimisation.Expression;
@@ -11,6 +12,9 @@ import org.ojalgo.optimisation.Variable;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.function.Function;
+
+import static java.math.BigDecimal.ONE;
+import static java.math.BigDecimal.ZERO;
 
 public final class Task11BatteryOptimizer {
 
@@ -28,9 +32,7 @@ public final class Task11BatteryOptimizer {
   public static Result optimise(
     List<OptimisationRow> optRows,
     List<DemandForecastRow> demandForecast,
-    BatterySpec b,
-    double exportPriceFactor,
-    double gridLimitKW,
+    Task11Config config,
     Function<OptimisationRow, Double> pvSelector
   ) {
 
@@ -38,6 +40,7 @@ public final class Task11BatteryOptimizer {
       throw new IllegalArgumentException("optRows and demandForecast must have same size (24 hours).");
     }
     int n = optRows.size();
+    var battery = config.battery();
 
     var model = new ExpressionsBasedModel();
 
@@ -48,76 +51,62 @@ public final class Task11BatteryOptimizer {
     var gridOut = new Variable[n];
     var pvUsed = new Variable[n];
 
-    Expression obj = model.addExpression("objective").weight(BigDecimal.ONE);
+    Expression obj = model.addExpression("objective").weight(ONE);
 
     for (int t = 0; t <= n; t++) {
       soc[t] = model.addVariable("soc_" + t)
-                 .lower(bd(b.minSocKWh()))
-                 .upper(bd(b.maxSocKWh()));
+                 .lower(bd(battery.minSocKWh()))
+                 .upper(bd(battery.maxSocKWh()));
     }
 
     model.addExpression("soc_init")
-      .level(bd(b.initialSocKWh()))
-      .set(soc[0], BigDecimal.ONE);
+      .level(bd(battery.initialSocKWh()))
+      .set(soc[0], ONE);
 
-    var gridMode = new Variable[n]; // binary per hour
     for (int t = 0; t < n; t++) {
-      gridMode[t] = model.addVariable("gridMode_" + t)
-                      .binary();
-
       charge[t] = model.addVariable("ch_" + t)
-                    .lower(BigDecimal.ZERO)
-                    .upper(bd(b.chargeLimitKW()));
+                    .lower(ZERO)
+                    .upper(bd(battery.chargeLimitKW()));
 
       discharge[t] = model.addVariable("dis_" + t)
-                       .lower(BigDecimal.ZERO)
-                       .upper(bd(b.dischargeLimitKW()));
+                       .lower(ZERO)
+                       .upper(bd(battery.dischargeLimitKW()));
 
       gridIn[t] = model.addVariable("gridIn_" + t)
-                    .lower(BigDecimal.ZERO)
-                    .upper(bd(gridLimitKW));
+                    .lower(ZERO)
+                    .upper(bd(config.gridLimitKW()));
 
       gridOut[t] = model.addVariable("gridOut_" + t)
-                     .lower(BigDecimal.ZERO)
-                     .upper(bd(gridLimitKW));
+                     .lower(ZERO)
+                     .upper(bd(config.gridLimitKW()));
 
       pvUsed[t] = model.addVariable("pvUsed_" + t)
-                    .lower(BigDecimal.ZERO);
-
-      model.addExpression("grid_import_limit_" + t)
-        .upper(bd(gridLimitKW))
-        .set(gridIn[t], BigDecimal.ONE)
-        .set(gridMode[t], bd(-gridLimitKW));
-
-      model.addExpression("grid_export_limit_" + t)
-        .upper(bd(gridLimitKW))
-        .set(gridOut[t], BigDecimal.ONE)
-        .set(gridMode[t], bd(gridLimitKW));
+                    .lower(ZERO);
 
       double pvAvail = safeNonNeg(pvSelector.apply(optRows.get(t)));
       model.addExpression("pv_cap_" + t)
         .upper(bd(pvAvail))
-        .set(pvUsed[t], BigDecimal.ONE);
+        .set(pvUsed[t], ONE);
 
       model.addExpression("soc_dyn_" + t)
-        .level(BigDecimal.ZERO)
-        .set(soc[t + 1], BigDecimal.ONE)
-        .set(soc[t], BigDecimal.ONE.negate())
-        .set(charge[t], bd(-b.etaCharge()))
-        .set(discharge[t], bd(1.0 / b.etaDischarge()));
+        .level(ZERO)
+        .set(soc[t + 1], ONE)
+        .set(soc[t], ONE.negate())
+        .set(charge[t], bd(-battery.etaCharge()))
+        .set(discharge[t], bd(1.0 / battery.etaDischarge()));
 
       double demand = demandForecast.get(t).demandForecast();
       model.addExpression("balance_" + t)
         .level(bd(demand))
-        .set(gridIn[t], BigDecimal.ONE)
-        .set(pvUsed[t], BigDecimal.ONE)
-        .set(discharge[t], BigDecimal.ONE)
-        .set(charge[t], BigDecimal.ONE.negate())
-        .set(gridOut[t], BigDecimal.ONE.negate());
+        .set(gridIn[t], ONE)
+        .set(pvUsed[t], ONE)
+        .set(discharge[t], ONE)
+        .set(charge[t], ONE.negate())
+        .set(gridOut[t], ONE.negate());
 
       double price = safeNonNeg(optRows.get(t).price());
       obj.set(gridIn[t], bd(price));
-      obj.set(gridOut[t], bd(-exportPriceFactor * price));
+      obj.set(gridOut[t], bd(-config.exportPriceFactor() * price));
     }
 
     Optimisation.Result solution = model.minimise();
@@ -150,7 +139,7 @@ public final class Task11BatteryOptimizer {
   }
 
   private static BigDecimal bd(double v) {
-    if (Double.isNaN(v) || Double.isInfinite(v)) return BigDecimal.ZERO;
+    if (Double.isNaN(v) || Double.isInfinite(v)) return ZERO;
     return BigDecimal.valueOf(v);
   }
 

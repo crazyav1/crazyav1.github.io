@@ -9,8 +9,8 @@ import java.nio.file.Path;
 public final class Task11CostPlotsRunner {
 
   static void main() {
-    var lowPath = Path.of("task11_schedule_pv_low.csv");
-    var highPath = Path.of("task11_schedule_pv_high.csv");
+    var lowPath = Path.of("figures/task11_schedule_pv_low.csv");
+    var highPath = Path.of("figures/task11_schedule_pv_high.csv");
 
     var low = Task11ScheduleCsvReader.load(lowPath);
     var high = Task11ScheduleCsvReader.load(highPath);

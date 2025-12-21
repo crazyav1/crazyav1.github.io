@@ -14,7 +14,7 @@ public final class Task11CostPlotter {
   private static final int W = 1100;
   private static final int H = 650;
 
-  private static final OutputConfig OUT = new OutputConfig(Path.of("task11_figures"), W, false);
+  private static final OutputConfig OUT = new OutputConfig(Path.of("figures/task11_figures"), W, true);
 
   public static void plotTotalCost(double totalNoPv, double totalPvLow, double totalPvHigh) {
     CategoryChart chart = new CategoryChartBuilder()

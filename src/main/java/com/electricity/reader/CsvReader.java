@@ -1,6 +1,7 @@
 package com.electricity.reader;
 
 import com.electricity.models.DataRow;
+import com.electricity.util.TimeParsers;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -12,9 +13,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CsvReader {
-
-  private static final DateTimeFormatter TS_FMT =
-    DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ssXXX");
 
   public static List<DataRow> loadTrainTest(Path csvPath) throws IOException {
     List<DataRow> rows = new ArrayList<>();
@@ -35,7 +33,7 @@ public class CsvReader {
           );
         }
 
-        OffsetDateTime ts = OffsetDateTime.parse(cols[0].trim(), TS_FMT);
+        var time = TimeParsers.parseOffsetDateTime(cols[0]);
 
         double pvMod1 = parseDoubleOrNa(cols[1]);
         double pvMod2 = parseDoubleOrNa(cols[2]);
@@ -57,7 +55,7 @@ public class CsvReader {
         double dayMax = parseDoubleOrNa(cols[18]);
 
         var row = new DataRow(
-          ts,
+          time,
           pvMod1, pvMod2, pvMod3,
           demand, pv, price,
           temp, pressure,
