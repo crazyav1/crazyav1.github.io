@@ -47,8 +47,8 @@ public final class ScatterPlotter {
 
     chart.addSeries("Demand vs Temperature", x, y);
 
-    ChartExporter.saveSvg(chart, out, "scatter_demand_vs_temperature");
-    ChartExporter.savePng(chart, out, "scatter_demand_vs_temperature");
+    ChartExporter.saveSvg(chart, out, "task3_scatter_demand_vs_temperature");
+    ChartExporter.savePng(chart, out, "task3_scatter_demand_vs_temperature");
 
     if (out.showOnScreen()) {
       new SwingWrapper<>(chart).displayChart();

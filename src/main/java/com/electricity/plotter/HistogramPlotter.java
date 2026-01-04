@@ -41,8 +41,8 @@ public final class HistogramPlotter {
     chart.addSeries(cfg.xTitle(), histogram.getxAxisData(), histogram.getyAxisData());
     chart.getStyler().setXAxisLabelRotation(cfg.xLabelRotationDeg());
 
-    ChartExporter.saveSvg(chart, out, "histogram_price");
-    ChartExporter.savePng(chart, out, "histogram_price");
+    ChartExporter.saveSvg(chart, out, "task3_histogram_price");
+    ChartExporter.savePng(chart, out, "task3_histogram_price");
 
     if (out.showOnScreen()) {
       new SwingWrapper<>(chart).displayChart();

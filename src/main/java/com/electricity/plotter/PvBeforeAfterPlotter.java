@@ -43,8 +43,8 @@ public final class PvBeforeAfterPlotter {
     chart.addSeries("Univariate (linear)", t, u);
     chart.addSeries("Multivariate (OLS)", t, m);
 
-    ChartExporter.saveSvg(chart, out, "pv_mod1_before_after");
-    ChartExporter.savePng(chart, out, "pv_mod1_before_after");
+    ChartExporter.saveSvg(chart, out, "task4_pv_mod1_before_after");
+    ChartExporter.savePng(chart, out, "task4_pv_mod1_before_after");
 
     if (out.showOnScreen()) new SwingWrapper<>(chart).displayChart();
   }

@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>ITS8080 – Final Presentation (Interactive)</title>
+
+    <!-- Bootstrap 5.3+ -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Chart.js 4 -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+
+    <style>
+        body {
+            scroll-behavior: smooth;
+        }
+
+        section {
+            padding: 84px 0;
+        }
+
+        .hero {
+            padding-top: 110px;
+            padding-bottom: 70px;
+            background: linear-gradient(135deg, #0b1f3a, #123b6b);
+            color: #fff;
+        }
+
+        .card-soft {
+            border: 1px solid rgba(0, 0, 0, .08);
+            box-shadow: 0 8px 28px rgba(0, 0, 0, .06);
+            border-radius: 18px;
+        }
+
+        .chart-wrap {
+            height: 380px;
+            position: relative;
+        }
+
+        .badge-soft {
+            background: rgba(13, 110, 253, .12);
+            color: #0d6efd;
+            border: 1px solid rgba(13, 110, 253, .22);
+            font-weight: 600;
+        }
+
+        footer {
+            padding: 36px 0;
+            background: #f8f9fa;
+            border-top: 1px solid rgba(0, 0, 0, .08);
+        }
+
+        .nav-link {
+            opacity: .9;
+        }
+
+        .nav-link:hover {
+            opacity: 1;
+        }
+
+        .tiny {
+            font-size: .9rem;
+            color: rgba(255, 255, 255, .85);
+        }
+
+        .muted {
+            color: rgba(0, 0, 0, .65);
+        }
+
+        .kbd {
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+            font-size: .9rem;
+            background: #f1f3f5;
+            padding: 2px 8px;
+            border-radius: 8px;
+            border: 1px solid rgba(0, 0, 0, .08);
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container">
+        <a class="navbar-brand fw-semibold" href="#intro">ITS8080</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav" aria-controls="nav"
+                aria-expanded="false">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div id="nav" class="collapse navbar-collapse">
+            <ul class="navbar-nav ms-auto gap-lg-2">
+                <li class="nav-item"><a class="nav-link" href="#intro">Intro</a></li>
+                <li class="nav-item"><a class="nav-link" href="#task1">Task 1</a></li>
+                <li class="nav-item"><a class="nav-link" href="#task3">Task 3</a></li>
+                <li class="nav-item"><a class="nav-link" href="#task5">Task 5</a></li>
+                <li class="nav-item"><a class="nav-link" href="#task6">Task 6</a></li>
+                <li class="nav-item"><a class="nav-link" href="#task7">Task 7</a></li>
+                <li class="nav-item"><a class="nav-link" href="#task8">Task 8</a></li>
+                <li class="nav-item"><a class="nav-link" href="#task9">Task 9</a></li>
+                <li class="nav-item"><a class="nav-link" href="#task11">Task 11</a></li>
+                <li class="nav-item"><a class="nav-link" href="#conclusion">Conclusion</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- INTRO / HERO -->
+<header id="intro" class="hero">
+    <div class="container">
+        <div class="row align-items-center g-4">
+            <div class="col-lg-7">
+                <h1 class="display-6 fw-bold mb-3">Smart Home Energy Management</h1>
+                <p class="lead mb-3">
+                    Forecast hourly electricity <b>demand</b> and optimise battery operation using
+                    statistical models, machine learning, and MILP.
+                </p>
+                <p class="tiny mb-4">
+                    Data endpoints are loaded live from SpringBoot app.
+                </p>
+
+                <div class="d-flex gap-2 flex-wrap">
+                    <a href="#task1" class="btn btn-primary btn-lg">Start demo</a>
+                    <button id="btnReload" class="btn btn-outline-light btn-lg">Reload charts</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- TASK 1 -->
+<section id="task1">
+    <div class="container">
+        <div class="d-flex align-items-end justify-content-between flex-wrap gap-2 mb-3">
+            <div>
+                <h2 class="fw-bold mb-1">Task 1 — Introduction</h2>
+                <div class="muted">Demand overview (time series)</div>
+            </div>
+            <span class="badge text-bg-light border">GET <span class="kbd">/api/task1/price-demand-pv</span></span>
+        </div>
+        <div class="align-items-end justify-content-between flex-wrap gap-2 mb-3" id="dateControls">
+            <div class="form-floating">
+                <input id="task1-startDate" type="datetime-local" data-time="2013-07-01T00:00:00+00:00" class="form-control form-control-sm" />
+                <label for="task1-startDate" class="small">Start (local)</label>
+            </div>
+            <div class="form-floating">
+                <input id="task1-endDate" type="datetime-local" data-time="2013-07-08T00:00:00+00:00" class="form-control form-control-sm" />
+                <label for="task1-endDate" class="small">End (local)</label>
+            </div>
+        </div>
+        <div class="card card-soft">
+            <div class="card-body">
+                <div class="chart-wrap">
+                    <canvas id="demandChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- TASK 3 -->
+<section id="task3">
+    <div class="container">
+        <div class="d-flex align-items-end justify-content-between flex-wrap gap-2 mb-3">
+            <div>
+                <h2 class="fw-bold mb-1">Task 3 — Visualisation</h2>
+                <div class="muted">Price Distribution</div>
+            </div>
+            <span class="badge text-bg-light border">GET <span class="kbd">/api/task3/price-histogram</span></span>
+        </div>
+        <div class="card shadow-sm border-0 rounded-4  mb-4">
+            <div class="card-body">
+                <div class="d-flex align-items-center justify-content-between flex-wrap gap-2 mb-3">
+                    <div>
+                        <h5 class="mb-0">Histogram binning methods</h5>
+                        <div class="text-muted small">Quick comparison and one-click apply</div>
+                    </div>
+
+                    <span class="badge text-bg-light border" id="histMethodBadge">Current: STURGES</span>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table table-hover align-middle mb-0">
+                        <thead class="table-light">
+                        <tr>
+                            <th style="width: 26%">Method</th>
+                            <th style="width: 20%">Data size</th>
+                            <th style="width: 18%">Outlier robust</th>
+                            <th style="width: 18%">Detail level</th>
+                            <th style="width: 18%">Apply</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td class="fw-semibold">Sturges</td>
+                            <td>Small–medium</td>
+                            <td><span class="badge text-bg-secondary">No</span></td>
+                            <td>Low</td>
+                            <td>
+                                <button class="btn btn-sm btn-outline-primary"
+                                        type="button"
+                                        onclick="applyHistogramMethod('STURGES')">
+                                    Apply
+                                </button>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td class="fw-semibold">Rice</td>
+                            <td>Medium–large</td>
+                            <td><span class="badge text-bg-secondary">No</span></td>
+                            <td>Medium</td>
+                            <td>
+                                <button class="btn btn-sm btn-outline-primary"
+                                        type="button"
+                                        onclick="applyHistogramMethod('RICE')">
+                                    Apply
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="fw-semibold">Freedman–Diaconis</td>
+                            <td>Any</td>
+                            <td><span class="badge text-bg-success">Yes</span></td>
+                            <td>Adaptive</td>
+                            <td>
+                                <button class="btn btn-sm btn-outline-primary"
+                                        type="button"
+                                        onclick="applyHistogramMethod('FREEDMAN_DIACONIS')">
+                                    Apply
+                                </button>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="card card-soft  mb-4">
+            <div class="card-body">
+                <div class="chart-wrap">
+                    <canvas id="priceHistogram"></canvas>
+                </div>
+            </div>
+        </div>
+        <div class="d-flex align-items-end justify-content-between flex-wrap gap-2 mb-3">
+            <div>
+                <div class="muted">Scatter of demand and temperature</div>
+            </div>
+            <span class="badge text-bg-light border">GET <span class="kbd">/api/task3/demand-vs-temperature</span></span>
+        </div>
+        <div class="d-flex align-items-end justify-content-between flex-wrap gap-2 mb-3">
+
+                <label for="dragNumber" class="form-label fw-semibold">Marker Size</label>
+                <div class="d-flex align-items-center gap-3">
+                    <input id="dragNumber" type="range" class="form-range flex-grow-1"
+                           min="1" max="15" step="1" value="4" aria-label="Marker Size">
+                    <span id="dragNumberValue" class="badge bg-primary fs-6">4</span>
+                </div>
+                <div class="form-text">Drag to change the value (1–15).</div>
+
+        </div>
+        <div class="card card-soft">
+            <div class="card-body">
+                <div class="chart-wrap">
+                    <canvas id="demandScatter"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- TASK 5 -->
+<section id="task5" class="bg-light">
+    <div class="container">
+        <div class="d-flex align-items-end justify-content-between flex-wrap gap-2 mb-3">
+            <div>
+                <h2 class="fw-bold mb-1">Task 5 — Feature Engineering</h2>
+                <div class="muted">Feature ranking by relevance (|Pearson r|)</div>
+            </div>
+            <span class="badge text-bg-light border">GET <span class="kbd">/api/task5/feature-ranking</span></span>
+        </div>
+
+        <div class="card card-soft">
+            <div class="card-body">
+                <div class="chart-wrap">
+                    <canvas id="featureRankingChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- TASK 6 -->
+<section id="task6">
+    <div class="container">
+        <div class="d-flex align-items-end justify-content-between flex-wrap gap-2 mb-3">
+            <div>
+                <h2 class="fw-bold mb-1">Task 6 — Time Series Decomposition</h2>
+                <div class="muted">Additive classical decomposition (trend / seasonality / residual)</div>
+            </div>
+            <span class="badge text-bg-light border">GET <span class="kbd">/api/task6/decomposition</span></span>
+        </div>
+
+        <div class="card card-soft">
+            <div class="card-body">
+                <div class="chart-wrap">
+                    <canvas id="decompositionChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- TASK 7 -->
+<section id="task7" class="bg-light">
+    <div class="container">
+        <div class="d-flex align-items-end justify-content-between flex-wrap gap-2 mb-3">
+            <div>
+                <h2 class="fw-bold mb-1">Task 7 — Statistical Modelling</h2>
+                <div class="muted">ACF & PACF for AR model order selection</div>
+            </div>
+            <div class="d-flex gap-2 flex-wrap">
+                <span class="badge text-bg-light border">GET <span class="kbd">/api/task7/acf</span></span>
+                <span class="badge text-bg-light border">GET <span class="kbd">/api/task7/pacf</span></span>
+            </div>
+        </div>
+
+        <div class="row g-3">
+            <div class="col-lg-6">
+                <div class="card card-soft">
+                    <div class="card-body">
+                        <h5 class="fw-semibold mb-2">ACF</h5>
+                        <div class="chart-wrap">
+                            <canvas id="acfChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="card card-soft">
+                    <div class="card-body">
+                        <h5 class="fw-semibold mb-2">PACF</h5>
+                        <div class="chart-wrap">
+                            <canvas id="pacfChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- TASK 8 -->
+<section id="task8">
+    <div class="container">
+        <div class="d-flex align-items-end justify-content-between flex-wrap gap-2 mb-3">
+            <div>
+                <h2 class="fw-bold mb-1">Task 8 — Machine Learning</h2>
+                <div class="muted">XGBoost forecast (direct strategy)</div>
+            </div>
+            <span class="badge text-bg-light border">GET <span class="kbd">/api/task8/forecast/xgboost</span></span>
+        </div>
+
+        <div class="card card-soft">
+            <div class="card-body">
+                <div class="chart-wrap">
+                    <canvas id="xgbForecastChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- TASK 9 -->
+<section id="task9" class="bg-light">
+    <div class="container">
+        <div class="d-flex align-items-end justify-content-between flex-wrap gap-2 mb-3">
+            <div>
+                <h2 class="fw-bold mb-1">Task 9 — Out-of-sample Forecast (7 days)</h2>
+                <div class="muted">Compare AR vs XGBoost vs baselines (naive/drift)</div>
+            </div>
+            <span class="badge text-bg-light border">GET <span class="kbd">/api/task9/forecast/compare</span></span>
+        </div>
+
+        <div class="card card-soft">
+            <div class="card-body">
+                <div class="chart-wrap">
+                    <canvas id="forecastCompareChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- TASK 11 -->
+<section id="task11">
+    <div class="container">
+        <div class="d-flex align-items-end justify-content-between flex-wrap gap-2 mb-3">
+            <div>
+                <h2 class="fw-bold mb-1">Task 11 — Battery Optimisation (MILP)</h2>
+                <div class="muted">SOC + cumulative cost comparison (PV_low vs PV_high)</div>
+            </div>
+            <div class="d-flex gap-2 flex-wrap">
+                <span class="badge text-bg-light border">GET <span
+                        class="kbd">/api/task11/soc?scenario=pv_low</span></span>
+                <span class="badge text-bg-light border">GET <span
+                        class="kbd">/api/task11/soc?scenario=pv_high</span></span>
+                <span class="badge text-bg-light border">GET <span
+                        class="kbd">/api/task11/costs/cumulative</span></span>
+                <span class="badge text-bg-light border">GET <span class="kbd">/api/task11/costs/summary</span></span>
+            </div>
+        </div>
+
+        <div class="row g-3">
+            <div class="col-lg-6">
+                <div class="card card-soft">
+                    <div class="card-body">
+                        <h5 class="fw-semibold mb-2">SOC — PV_low</h5>
+                        <div class="chart-wrap">
+                            <canvas id="socLowChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <div class="card card-soft">
+                    <div class="card-body">
+                        <h5 class="fw-semibold mb-2">SOC — PV_high</h5>
+                        <div class="chart-wrap">
+                            <canvas id="socHighChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-8">
+                <div class="card card-soft">
+                    <div class="card-body">
+                        <h5 class="fw-semibold mb-2">Cumulative cost (scenarios)</h5>
+                        <div class="chart-wrap">
+                            <canvas id="costChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <div class="card card-soft">
+                    <div class="card-body">
+                        <h5 class="fw-semibold mb-2">Total cost summary</h5>
+                        <div class="chart-wrap">
+                            <canvas id="costSummaryChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- CONCLUSION -->
+<section id="conclusion" class="bg-light">
+    <div class="container">
+        <h2 class="fw-bold mb-3">Conclusion</h2>
+        <div class="row g-3">
+            <div class="col-lg-7">
+                <div class="card card-soft">
+                    <div class="card-body">
+                        <h5 class="fw-semibold">Key points</h5>
+                        <ul class="mb-0">
+                            <li>Demand shows strong daily patterns (time features matter).</li>
+                            <li>ML (XGBoost) can outperform pure autoregressive baselines.</li>
+                            <li>Optimisation uses demand forecast + ideal PV/price to minimise cost.</li>
+                            <li>PV_high typically allows lower cost / possible profit vs PV_low.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-5">
+                <div class="card card-soft">
+                    <div class="card-body">
+                        <h5 class="fw-semibold">Demo checklist</h5>
+                        <div class="muted mb-2">If something fails, check:</div>
+                        <ol class="mb-0">
+                            <li>Canvas ID exists in HTML</li>
+                            <li>Endpoint returns expected JSON shape</li>
+                            <li>Backend is running on same origin / CORS</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer class="text-center">
+    <div class="container">
+        <div class="mb-1 fw-semibold">ITS8080 – Energy Informatics · Final Presentation</div>
+        <div class="muted">Interactive Bootstrap + Chart.js template for Spring Boot APIs</div>
+    </div>
+</footer>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- ===================== CHART FETCH + RENDER (ROBUST) ===================== -->
+<script>
+    const charts = {};
+
+    function getCanvas(canvasId) {
+        const el = document.getElementById(canvasId);
+        if (!el) {
+            console.error(`[Chart] Canvas not found: #${canvasId}`);
+            return null;
+        }
+        return el;
+    }
+
+    function destroyIfExists(canvasId) {
+        if (charts[canvasId]) {
+            charts[canvasId].destroy();
+            delete charts[canvasId];
+        }
+    }
+
+    async function fetchJson(url) {
+        const res = await fetch(url);
+        if (!res.ok) {
+            const text = await res.text().catch(() => "");
+            throw new Error(`HTTP ${res.status} for ${url}. Body: ${text}`);
+        }
+        return res.json();
+    }
+
+    // LINE: expects { labels:[], series:{name:[..], ...} }
+    async function fetchAndRenderChart(canvasId, url, options = {}) {
+        const canvas = getCanvas(canvasId);
+        if (!canvas) return;
+
+        const data = await fetchJson(url);
+
+        destroyIfExists(canvasId);
+        charts[canvasId] = new Chart(canvas, data);
+    }
+
+    // BAR: expects [{name,value}, ...]
+    async function fetchAndRenderBarChart(canvasId, url, datasetLabel = "Value") {
+        const canvas = getCanvas(canvasId);
+        if (!canvas) return;
+
+        const data = await fetchJson(url);
+
+        const labels = data.map(d => d.name);
+        const values = data.map(d => d.value);
+
+        destroyIfExists(canvasId);
+
+        charts[canvasId] = new Chart(canvas, {
+            type: "bar",
+            data: {
+                labels,
+                datasets: [{label: datasetLabel, data: values}]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {legend: {display: true}}
+            }
+        });
+    }
+
+    function offsetIsoToDatetimeLocal(iso) {
+        if (!iso) return null;
+        const d = new Date(iso); // parses the offset ISO instant
+        const pad = (n) => String(n).padStart(2, '0');
+        const year = d.getFullYear();
+        const month = pad(d.getMonth() + 1);
+        const day = pad(d.getDate());
+        const hours = pad(d.getHours());
+        const minutes = pad(d.getMinutes());
+        return `${year}-${month}-${day}T${hours}:${minutes}`;
+    }
+    function datetimeLocalToIsoOffset(el) {
+        if (!el || !el.value) return null;
+        el.dataset.time =  new Date(el.value).toISOString();
+    }
+
+    async function loadAllCharts() {
+        // Task 1
+        await fetchAndRenderChart("demandChart", "/api/task1/price-demand-pv");
+        
+        // Task 3
+        await fetchAndRenderChart("priceHistogram", "/api/task3/price-histogram");
+        await fetchAndRenderChart("demandScatter", "/api/task3/demand-vs-temperature");
+
+        // Task 5
+        await fetchAndRenderBarChart("featureRankingChart", "/api/task5/feature-ranking", "Abs Pearson r");
+
+        // Task 6
+        await fetchAndRenderChart("decompositionChart", "/api/task6/decomposition");
+
+        // Task 7
+        await fetchAndRenderBarChart("acfChart", "/api/task7/acf", "ACF");
+        await fetchAndRenderBarChart("pacfChart", "/api/task7/pacf", "PACF");
+
+        // Task 8
+        await fetchAndRenderChart("xgbForecastChart", "/api/task8/forecast/xgboost");
+
+        // Task 9
+        await fetchAndRenderChart("forecastCompareChart", "/api/task9/forecast/compare");
+
+        // Task 11
+        await fetchAndRenderChart("socLowChart", "/api/task11/soc?scenario=pv_low");
+        await fetchAndRenderChart("socHighChart", "/api/task11/soc?scenario=pv_high");
+        await fetchAndRenderChart("costChart", "/api/task11/costs/cumulative");
+        await fetchAndRenderBarChart("costSummaryChart", "/api/task11/costs/summary", "Total cost");
+
+        let task1Start = document.getElementById("task1-startDate");
+        let task1End = document.getElementById("task1-endDate");
+
+        const startIso = "2013-07-01T00:00:00+00:00";
+        const endIso   = "2013-07-08T00:00:00+00:00";
+        task1Start.value = offsetIsoToDatetimeLocal(startIso);
+        task1End.value   = offsetIsoToDatetimeLocal(endIso);
+
+        document.getElementById('dragNumber').value = 4;
+        document.getElementById('dragNumberValue').textContent = '4';
+    }
+
+    document.addEventListener("DOMContentLoaded", async () => {
+        try {
+            await loadAllCharts();
+        } catch (e) {
+            console.error("Chart init failed:", e);
+        }
+
+        document.getElementById("btnReload")?.addEventListener("click", async () => {
+            try {
+                await loadAllCharts();
+            } catch (e) {
+                console.error("Reload failed:", e);
+            }
+        });
+
+        let task1Start = document.getElementById("task1-startDate");
+        let task1End = document.getElementById("task1-endDate");
+
+        function updateDemandChart(event){
+            const el = event.target;
+            datetimeLocalToIsoOffset(el);
+            fetchAndRenderChart("demandChart",
+                `/api/task1/price-demand-pv?start=${task1Start.dataset.time}&end=${task1End.dataset.time}`)
+
+        }
+
+        const startIso = "2013-07-01T00:00:00+00:00";
+        const endIso   = "2013-07-08T00:00:00+00:00";
+        task1Start.value = offsetIsoToDatetimeLocal(startIso);
+        task1End.value   = offsetIsoToDatetimeLocal(endIso);
+        task1Start.addEventListener("change", updateDemandChart);
+        task1End.addEventListener("change", updateDemandChart);
+    });
+
+    async function applyHistogramMethod(method) {
+        const badge = document.getElementById('histMethodBadge');
+        if (badge) badge.textContent = `Current: ${method}`;
+
+        const url = `/api/task3/price-histogram?method=${encodeURIComponent(method)}`;
+        await fetchAndRenderChart("priceHistogram", url);
+        const sel = document.getElementById('histMethodSelect');
+        if (sel && sel.value !== method) sel.value = method;
+    }
+
+    (function(){
+        const slider = document.getElementById('dragNumber');
+        const display = document.getElementById('dragNumberValue');
+
+        if (!slider || !display) return;
+
+        function onSliderChange(e) {
+            const v = e.target.value;
+            if(display.textContent === v) return;
+            display.textContent = v;
+            fetchAndRenderChart("demandScatter", `/api/task3/demand-vs-temperature?markerSize=${encodeURIComponent(v)}`);
+        }
+
+        slider.addEventListener('input', onSliderChange);
+        slider.addEventListener('change', onSliderChange);
+
+        display.addEventListener('click', () => {
+            let v = Number(slider.value);
+            v = v >= Number(slider.max) ? Number(slider.min) : v + 1;
+            slider.value = v;
+            display.textContent = v;
+            slider.dispatchEvent(new Event('input', { bubbles: true }));
+            slider.dispatchEvent(new Event('change', { bubbles: true }));
+        });
+    })();
+</script>
+
+</body>
+</html>

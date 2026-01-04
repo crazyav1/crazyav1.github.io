@@ -2,6 +2,7 @@ package com.electricity.plotter;
 
 import com.electricity.config.OutputConfig;
 import com.electricity.exporter.ChartExporter;
+import com.electricity.models.AlignedPoints;
 import com.electricity.models.DataRow;
 import org.knowm.xchart.SwingWrapper;
 import org.knowm.xchart.XYChart;
@@ -36,7 +37,7 @@ public final class TimeSeriesPlotter {
     chart.addSeries("Demand (kW)", points.time(), points.demand());
     chart.addSeries("PV (kW)", points.time(), points.pv());
 
-    chart.addSeries("Price (Euro/kWh)", points.timePrice(), points.price())
+    chart.addSeries("Price (Euro/kWh)", points.time(), points.price())
       .setYAxisGroup(1)
       .setFillColor(Color.RED);
 
@@ -44,8 +45,8 @@ public final class TimeSeriesPlotter {
     chart.setYAxisGroupTitle(1, "Price (Euro/kWh)");
     chart.getStyler().setYAxisGroupPosition(1, Right);
 
-    ChartExporter.saveSvg(chart, out, "timeseries_demand_pv_price");
-    ChartExporter.savePng(chart, out, "timeseries_demand_pv_price");
+    ChartExporter.saveSvg(chart, out, "task3_timeseries_demand_pv_price");
+    ChartExporter.savePng(chart, out, "task3_timeseries_demand_pv_price");
 
     if (out.showOnScreen()) {
       new SwingWrapper<>(chart).displayChart();
@@ -77,36 +78,20 @@ public final class TimeSeriesPlotter {
              .toList();
   }
 
-  private static AlignedPoints align(List<DataRow> subset) {
+  public static AlignedPoints align(List<DataRow> subset) {
     var tPow = new ArrayList<Date>(subset.size());
     var demand = new ArrayList<Double>(subset.size());
     var pv = new ArrayList<Double>(subset.size());
-
-    var tPrice = new ArrayList<Date>(subset.size());
     var price = new ArrayList<Double>(subset.size());
 
     subset.forEach(r -> {
       var ts = Date.from(r.timestamp().toInstant());
-      if (!Double.isNaN(r.demand()) && !Double.isNaN(r.pv())) {
         tPow.add(ts);
         demand.add(r.demand());
         pv.add(r.pv());
-      }
-      if (!Double.isNaN(r.price())) {
-        tPrice.add(ts);
         price.add(r.price());
-      }
     });
 
-    return new AlignedPoints(tPow, demand, pv, tPrice, price);
-  }
-
-  private record AlignedPoints(
-    List<Date> time,
-    List<Double> demand,
-    List<Double> pv,
-    List<Date> timePrice,
-    List<Double> price
-  ) {
+    return new AlignedPoints(tPow, demand, pv, price);
   }
 }
