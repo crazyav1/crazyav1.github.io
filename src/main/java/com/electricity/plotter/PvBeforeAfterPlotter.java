@@ -17,7 +17,8 @@ public final class PvBeforeAfterPlotter {
     this.out = out;
   }
 
-  public void plot(List<DataRow> rows, double[] original, double[] uni, double[] multi, int startIndex, int lengthHours) {
+  public void plot(List<DataRow> rows, double[] original, double[] uni, double[] multi,
+                   int startIndex, int lengthHours) {
     var end = Math.min(rows.size(), startIndex + lengthHours);
 
     var t = rows.subList(startIndex, end).stream()
@@ -51,7 +52,9 @@ public final class PvBeforeAfterPlotter {
 
   private static List<Double> slice(double[] arr, int start, int end) {
     var out = new java.util.ArrayList<Double>(end - start);
-    for (int i = start; i < end; i++) out.add(arr[i]);
+    for (int i = start; i < end; i++) {
+      out.add(arr[i]);
+    }
     return out;
   }
 }
