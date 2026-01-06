@@ -7,7 +7,6 @@ public record Task11Config(
 ) {
     public static Task11Config fromDefaults() {
         var battery = new BatterySpec(
-            10.0,   // capacity kWh
             5.0,    // initial SOC kWh (assume 50%)
             0.0,    // min SOC
             10.0,   // max SOC

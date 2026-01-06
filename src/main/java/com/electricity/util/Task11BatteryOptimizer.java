@@ -1,6 +1,5 @@
 package com.electricity.util;
 
-import com.electricity.config.BatterySpec;
 import com.electricity.config.Task11Config;
 import com.electricity.models.DemandForecastRow;
 import com.electricity.models.OptimisationRow;

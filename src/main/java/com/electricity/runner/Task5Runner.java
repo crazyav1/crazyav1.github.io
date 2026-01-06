@@ -18,7 +18,7 @@ public final class Task5Runner {
   private static final OutputConfig OUT =
     OutputConfig.defaults(Path.of("figures"));
 
-  private static final Task5Config CFG =
+  public static final Task5Config CFG =
     Task5Config.defaults();
 
  static void main() throws Exception {
@@ -51,7 +51,7 @@ public final class Task5Runner {
     boolean useLog = !jb.isNormal();
     System.out.println(
       useLog
-        ? "Decision: Demand is not normal → apply log(Demand + ε)."
+        ? "Decision: Demand is not normal -> apply log(Demand + eps)."
         : "Decision: Demand approximately normal → no transformation."
     );
 

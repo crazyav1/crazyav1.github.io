@@ -20,9 +20,9 @@ public final class Task11CostCalculator {
     double total = 0.0;
     for (int t = 0; t < n; t++) {
       var r = rows.get(t);
-      double price = nz(r.price());
-      double gi = nz(r.gridImport());
-      double ge = nz(r.gridExport());
+      double price = getSafe(r.price());
+      double gi = getSafe(r.gridImport());
+      double ge = getSafe(r.gridExport());
 
       double c = price * gi - exportPriceFactor * price * ge;
       hourly[t] = c;
@@ -46,8 +46,8 @@ public final class Task11CostCalculator {
     double total = 0.0;
     for (int t = 0; t < n; t++) {
       var r = rows.get(t);
-      double price = nz(r.price());
-      double demand = nz(r.demandForecast());
+      double price = getSafe(r.price());
+      double demand = getSafe(r.demandForecast());
 
       double c = price * demand;
       hourly[t] = c;
@@ -58,16 +58,11 @@ public final class Task11CostCalculator {
     return new CostSeries(total, hourly, cum);
   }
 
-  private static double nz(double v) {
+  private static double getSafe(double v) {
     if (Double.isNaN(v) || Double.isInfinite(v)) return 0.0;
     return v;
   }
 
-  /**
-   * Baseline: PV available but NO battery.
-   * PV is used to cover demand, remainder bought from grid.
-   * No export, no storage.
-   */
   public static CostSeries costPvNoBattery(List<Task11ScheduleRow> rows) {
     int n = rows.size();
     double[] hourly = new double[n];
@@ -77,9 +72,9 @@ public final class Task11CostCalculator {
     for (int t = 0; t < n; t++) {
       var r = rows.get(t);
 
-      double price = nz(r.price());
-      double demand = nz(r.demandForecast());
-      double pv = nz(r.pvForecast());
+      double price = getSafe(r.price());
+      double demand = getSafe(r.demandForecast());
+      double pv = getSafe(r.pvForecast());
 
       double gridImport = Math.max(0.0, demand - pv);
       double c = price * gridImport;

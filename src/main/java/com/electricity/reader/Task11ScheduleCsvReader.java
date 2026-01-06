@@ -2,6 +2,7 @@ package com.electricity.reader;
 
 import com.electricity.models.Task11ScheduleRow;
 import com.electricity.util.TimeParsers;
+import lombok.NoArgsConstructor;
 
 import java.io.BufferedReader;
 import java.nio.file.Files;
@@ -9,6 +10,7 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
+@NoArgsConstructor
 public final class Task11ScheduleCsvReader {
 
   public static List<Task11ScheduleRow> load(Path csv) {
@@ -53,6 +55,4 @@ public final class Task11ScheduleCsvReader {
     }
     return Double.parseDouble(s);
   }
-
-  private Task11ScheduleCsvReader() {}
 }

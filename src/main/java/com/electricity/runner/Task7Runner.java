@@ -20,7 +20,7 @@ public final class Task7Runner {
   private static final Task7Config CFG = Task7Config.defaults();
 
   static void main() throws Exception {
-    List<DataRow> rows = CsvReader.loadTrainTest(TRAIN_PATH);
+    var rows = CsvReader.loadTrainTest(TRAIN_PATH);
 
     var t = rows.stream().map(DataRow::timestamp).toArray(OffsetDateTime[]::new);
     var y = rows.stream().mapToDouble(DataRow::demand).toArray();

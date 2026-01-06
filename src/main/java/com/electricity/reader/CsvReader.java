@@ -1,14 +1,14 @@
 package com.electricity.reader;
 
 import com.electricity.models.DataRow;
+import com.electricity.models.Task9ResultRow;
 import com.electricity.util.TimeParsers;
+import org.jspecify.annotations.NonNull;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.time.OffsetDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -74,6 +74,40 @@ public class CsvReader {
 
     return rows;
   }
+
+  public static List<Task9ResultRow> loadTask9ResultRow(Path csvPath) throws IOException {
+    List<Task9ResultRow> rows = new ArrayList<>();
+    try (BufferedReader br = Files.newBufferedReader(csvPath)) {
+      String header = br.readLine();
+      if (header == null) {
+        throw new IllegalStateException("Empty CSV file: " + csvPath);
+      }
+
+      String line;
+      while ((line = br.readLine()) != null) {
+        rows.add(getTask9ResultRow(line));
+      }
+      return rows;
+    }
+  }
+
+  private static Task9ResultRow getTask9ResultRow(String line) {
+    String[] cols = line.split(",", -1);
+
+    if (cols.length < 1) {
+      throw new IllegalStateException();
+    }
+    var day = cols[0];
+    var hour = Integer.parseInt(cols[1]);
+    var actual = Double.parseDouble(cols[2]);
+
+    var ar = Double.parseDouble(cols[3]);
+    var xgboost = Double.parseDouble(cols[4]);
+    var naive = Double.parseDouble(cols[5]);
+    var drift = Double.parseDouble(cols[6]);
+    return new Task9ResultRow(day, hour, actual, ar, xgboost, naive, drift);
+  }
+
 
   private static double parseDoubleOrNa(String s) {
     s = s.trim();

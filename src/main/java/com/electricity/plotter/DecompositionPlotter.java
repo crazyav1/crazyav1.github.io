@@ -16,10 +16,19 @@ public final class DecompositionPlotter {
   public static void plot(ClassicalDecomposition.Result dec, List<DataRow> rows, OutputConfig out) {
     var x = rows.stream().map(r -> Date.from(r.timestamp().toInstant())).toList();
 
-    saveSeries("task6_observed_demand", "Observed demand", "Demand (kW)", x, dec.observed(), out);
-    saveSeries("task6_trend", "Trend component (Tt)", "Trend", x, dec.trend(), out);
-    saveSeries("task6_seasonal", "Seasonal component (St)", "Seasonality", x, dec.seasonal(), out);
-    saveSeries("task6_residual", "Residual component (Rt)", "Residual", x, dec.residual(), out);
+    int start = (x.size() / 2) - 36;
+    int end = (x.size() / 2) + 36;
+
+    var x24 = x.subList(start, end);
+    var observed24 = java.util.Arrays.copyOfRange(dec.observed(), start, end);
+    var trend24 = java.util.Arrays.copyOfRange(dec.trend(), start, end);
+    var seasonal24 = java.util.Arrays.copyOfRange(dec.seasonal(), start, end);
+    var residual24 = java.util.Arrays.copyOfRange(dec.residual(), start, end);
+
+    saveSeries("task6_observed_demand", "Observed demand", "Demand (kW)", x24, observed24, out);
+    saveSeries("task6_trend", "Trend component (Tt)", "Trend", x24, trend24, out);
+    saveSeries("task6_seasonal", "Seasonal component (St)", "Seasonality", x24, seasonal24, out);
+    saveSeries("task6_residual", "Residual component (Rt)", "Residual", x24, residual24, out);
   }
 
   private static void saveSeries(
@@ -43,7 +52,7 @@ public final class DecompositionPlotter {
     chart.getStyler().setDatePattern("dd.MM.yyyy");
     chart.getStyler().setMarkerSize(0);
 
-    chart.addSeries("Series", x, y);
+    chart.addSeries(yTitle, x, y);
 
     ChartExporter.saveSvg(chart, out, fileBase);
     ChartExporter.savePng(chart, out, fileBase);

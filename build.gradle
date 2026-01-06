@@ -31,10 +31,9 @@ dependencies {
     implementation 'org.jline:jline-parent:3.25.0'
 
     implementation 'tools.jackson.core:jackson-databind:3.0.3'
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.20.1'
     implementation 'com.fasterxml.jackson.core:jackson-annotations:3.0-rc5'
     implementation 'tools.jackson.core:jackson-core:3.0.3'
-
-
 
     implementation "org.ojalgo:ojalgo:55.2.0"
     compileOnly 'org.projectlombok:lombok:1.18.42'

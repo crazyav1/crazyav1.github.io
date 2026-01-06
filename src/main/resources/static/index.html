@@ -16,6 +16,7 @@
             scroll-behavior: smooth;
         }
 
+
         section {
             padding: 84px 0;
         }
@@ -101,6 +102,7 @@
                 <li class="nav-item"><a class="nav-link" href="#task7">Task 7</a></li>
                 <li class="nav-item"><a class="nav-link" href="#task8">Task 8</a></li>
                 <li class="nav-item"><a class="nav-link" href="#task9">Task 9</a></li>
+                <li class="nav-item"><a class="nav-link" href="#task10">Task 10</a></li>
                 <li class="nav-item"><a class="nav-link" href="#task11">Task 11</a></li>
                 <li class="nav-item"><a class="nav-link" href="#conclusion">Conclusion</a></li>
             </ul>
@@ -116,7 +118,7 @@
                 <h1 class="display-6 fw-bold mb-3">Smart Home Energy Management</h1>
                 <p class="lead mb-3">
                     Forecast hourly electricity <b>demand</b> and optimise battery operation using
-                    statistical models, machine learning, and MILP.
+                    statistical models, machine learning.
                 </p>
                 <p class="tiny mb-4">
                     Data endpoints are loaded live from SpringBoot app.
@@ -143,11 +145,13 @@
         </div>
         <div class="align-items-end justify-content-between flex-wrap gap-2 mb-3" id="dateControls">
             <div class="form-floating">
-                <input id="task1-startDate" type="datetime-local" data-time="2013-07-01T00:00:00Z" class="form-control form-control-sm" />
+                <input id="task1-startDate" type="datetime-local" data-time="2013-07-01T00:00:00Z"
+                       class="form-control form-control-sm"/>
                 <label for="task1-startDate" class="small">Start (local)</label>
             </div>
             <div class="form-floating">
-                <input id="task1-endDate" type="datetime-local" data-time="2013-07-08T00:00:00Z" class="form-control form-control-sm" />
+                <input id="task1-endDate" type="datetime-local" data-time="2013-07-08T00:00:00Z"
+                       class="form-control form-control-sm"/>
                 <label for="task1-endDate" class="small">End (local)</label>
             </div>
         </div>
@@ -250,17 +254,18 @@
             <div>
                 <div class="muted">Scatter of demand and temperature</div>
             </div>
-            <span class="badge text-bg-light border">GET <span class="kbd">/api/task3/demand-vs-temperature</span></span>
+            <span class="badge text-bg-light border">GET <span
+                    class="kbd">/api/task3/demand-vs-temperature</span></span>
         </div>
         <div class="d-flex align-items-end justify-content-between flex-wrap gap-2 mb-3">
 
-                <label for="dragNumber" class="form-label fw-semibold">Marker Size</label>
-                <div class="d-flex align-items-center gap-3">
-                    <input id="dragNumber" type="range" class="form-range flex-grow-1"
-                           min="1" max="15" step="1" value="4" aria-label="Marker Size">
-                    <span id="dragNumberValue" class="badge bg-primary fs-6">4</span>
-                </div>
-                <div class="form-text">Drag to change the value (1–15).</div>
+            <label for="dragNumber" class="form-label fw-semibold">Marker Size</label>
+            <div class="d-flex align-items-center gap-3">
+                <input id="dragNumber" type="range" class="form-range flex-grow-1"
+                       min="1" max="15" step="1" value="4" aria-label="Marker Size">
+                <span id="dragNumberValue" class="badge bg-primary fs-6">4</span>
+            </div>
+            <div class="form-text">Drag to change the value (1–15).</div>
 
         </div>
         <div class="card card-soft">
@@ -279,9 +284,7 @@
         <div class="d-flex align-items-end justify-content-between flex-wrap gap-2 mb-3">
             <div>
                 <h2 class="fw-bold mb-1">Task 4 —Data Cleaning</h2>
-                <div class="muted">Feature ranking by relevance (|Pearson r|)</div>
             </div>
-            <span class="badge text-bg-light border">GET <span class="kbd">/api/task5/feature-ranking</span></span>
         </div>
         <!-- PV Quality Report (Bootstrap 5) -->
         <div class="container my-4">
@@ -326,7 +329,8 @@
                                 <td class="text-end">0</td>
                             </tr>
                             <tr>
-                                <td>Outliers <span class="text-muted small">(daylight-only z-score &gt; 4.00)</span></td>
+                                <td>Outliers <span class="text-muted small">(daylight-only z-score &gt; 4.00)</span>
+                                </td>
                                 <td class="text-end">0</td>
                                 <td class="text-end">0</td>
                                 <td class="text-end">0</td>
@@ -340,7 +344,9 @@
                     <div class="d-flex flex-wrap gap-2 align-items-center justify-content-between">
                         <div class="text-muted small">
                             Inconsistency example:
-                            <span class="fw-semibold">pv_mod1 missing</span> while <span class="fw-semibold">pv_mod2</span> and <span class="fw-semibold">pv_mod3</span> present (daylight)
+                            <span class="fw-semibold">pv_mod1 missing</span> while <span
+                                class="fw-semibold">pv_mod2</span> and <span class="fw-semibold">pv_mod3</span> present
+                            (daylight)
                         </div>
                         <span class="badge bg-warning text-dark">Count: 29</span>
                     </div>
@@ -449,7 +455,8 @@
                                 </div>
 
                                 <div class="d-flex justify-content-between align-items-center mb-2">
-                                    <span class="text-muted">Suggesting <span class="fw-semibold">MNAR</span> <span class="small">(only if high proportion)</span></span>
+                                    <span class="text-muted">Suggesting <span class="fw-semibold">MNAR</span> <span
+                                            class="small">(only if high proportion)</span></span>
                                     <span class="badge bg-warning text-dark">check</span>
                                 </div>
                                 <div class="d-flex justify-content-between">
@@ -466,7 +473,8 @@
                 </div>
 
                 <div class="card-footer bg-white text-muted small">
-                    PV_mod2 and PV_mod3 are kept unchanged and used as auxiliary variables for multivariate imputation of PV_mod1.
+                    PV_mod2 and PV_mod3 are kept unchanged and used as auxiliary variables for multivariate imputation
+                    of PV_mod1.
                 </div>
             </div>
 
@@ -555,11 +563,13 @@
         </div>
         <div class="align-items-end justify-content-between flex-wrap gap-2 mb-3">
             <div class="form-floating">
-                <input id="task4-startDate" type="datetime-local" data-time="2013-07-01T00:00:00Z" class="form-control form-control-sm" />
+                <input id="task4-startDate" type="datetime-local" data-time="2013-07-01T00:00:00Z"
+                       class="form-control form-control-sm"/>
                 <label for="task1-startDate" class="small">Start (local)</label>
             </div>
             <div class="form-floating">
-                <input id="task4-endDate" type="datetime-local" data-time="2013-07-04T00:00:00Z" class="form-control form-control-sm" />
+                <input id="task4-endDate" type="datetime-local" data-time="2013-07-04T00:00:00Z"
+                       class="form-control form-control-sm"/>
                 <label for="task1-endDate" class="small">End (local)</label>
             </div>
         </div>
@@ -579,15 +589,323 @@
         <div class="d-flex align-items-end justify-content-between flex-wrap gap-2 mb-3">
             <div>
                 <h2 class="fw-bold mb-1">Task 5 — Feature Engineering</h2>
-                <div class="muted">Feature ranking by relevance (|Pearson r|)</div>
             </div>
-            <span class="badge text-bg-light border">GET <span class="kbd">/api/task5/feature-ranking</span></span>
         </div>
 
+        <div class="card my-4">
+            <div class="card-header d-flex align-items-center justify-content-between flex-wrap gap-2">
+                <span class="fw-semibold">Descriptive statistics</span>
+                <span class="badge text-bg-light border">Summary stats</span>
+            </div>
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <table class="table table-striped table-hover align-middle mb-0">
+                        <thead class="table-light">
+                        <tr>
+                            <th scope="col">Variable</th>
+                            <th scope="col" class="text-end">Count</th>
+                            <th scope="col" class="text-end">Missing</th>
+                            <th scope="col" class="text-end">Min</th>
+                            <th scope="col" class="text-end">Max</th>
+                            <th scope="col" class="text-end">Mean</th>
+                            <th scope="col" class="text-end">Std</th>
+                            <th scope="col" class="text-end">Median</th>
+                            <th scope="col" class="text-end">P05</th>
+                            <th scope="col" class="text-end">P95</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>Demand (kW)</td>
+                            <td class="text-end">8759</td>
+                            <td class="text-end">0</td>
+                            <td class="text-end">0.0</td>
+                            <td class="text-end">4.24</td>
+                            <td class="text-end">0.531</td>
+                            <td class="text-end">0.375</td>
+                            <td class="text-end">0.38</td>
+                            <td class="text-end">0.24</td>
+                            <td class="text-end">1.26</td>
+                        </tr>
+
+                        <tr>
+                            <td>Temperature (°C)</td>
+                            <td class="text-end">8759</td>
+                            <td class="text-end">0</td>
+                            <td class="text-end">-18.3</td>
+                            <td class="text-end">28.9</td>
+                            <td class="text-end">7.52</td>
+                            <td class="text-end">8.31</td>
+                            <td class="text-end">6.8</td>
+                            <td class="text-end">-6.9</td>
+                            <td class="text-end">20.4</td>
+                        </tr>
+
+                        <tr>
+                            <td>Cloud cover (%)</td>
+                            <td class="text-end">8759</td>
+                            <td class="text-end">0</td>
+                            <td class="text-end">0</td>
+                            <td class="text-end">100</td>
+                            <td class="text-end">68.70</td>
+                            <td class="text-end">36.27</td>
+                            <td class="text-end">88</td>
+                            <td class="text-end">0</td>
+                            <td class="text-end">100</td>
+                        </tr>
+
+                        <tr>
+                            <td>Shortwave radiation (W/m²)</td>
+                            <td class="text-end">1664</td>
+                            <td class="text-end">7095</td>
+                            <td class="text-end">0</td>
+                            <td class="text-end">756</td>
+                            <td class="text-end">114.95</td>
+                            <td class="text-end">181.90</td>
+                            <td class="text-end">2</td>
+                            <td class="text-end">0</td>
+                            <td class="text-end">542.6</td>
+                        </tr>
+
+                        <tr>
+                            <td>Wind speed 10 m (km/h)</td>
+                            <td class="text-end">8759</td>
+                            <td class="text-end">0</td>
+                            <td class="text-end">0.4</td>
+                            <td class="text-end">51.1</td>
+                            <td class="text-end">15.99</td>
+                            <td class="text-end">7.45</td>
+                            <td class="text-end">15</td>
+                            <td class="text-end">5.3</td>
+                            <td class="text-end">29.2</td>
+                        </tr>
+
+                        <tr>
+                            <td>Pressure (hPa)</td>
+                            <td class="text-end">8759</td>
+                            <td class="text-end">0</td>
+                            <td class="text-end">971.7</td>
+                            <td class="text-end">1041</td>
+                            <td class="text-end">1012.78</td>
+                            <td class="text-end">10.20</td>
+                            <td class="text-end">1013.3</td>
+                            <td class="text-end">996.4</td>
+                            <td class="text-end">1029</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="card-footer text-muted small">
+                Note: Shortwave radiation contains a high proportion of night-time structural zeros.
+            </div>
+        </div>
+
+        <div class="card my-4">
+            <div class="card-header d-flex align-items-center justify-content-between flex-wrap gap-2">
+                <span class="fw-semibold">Normality test</span>
+                <span class="badge bg-danger">Not normal</span>
+            </div>
+
+            <div class="card-body">
+                <div class="row g-3">
+                    <div class="col-12 col-md-4">
+                        <div class="border rounded-3 p-3 h-100">
+                            <div class="text-muted small mb-1">Test</div>
+                            <div class="fw-semibold">Jarque–Bera</div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-md-4">
+                        <div class="border rounded-3 p-3 h-100">
+                            <div class="text-muted small mb-1">JB statistic</div>
+                            <div class="fw-semibold">37,276.3220</div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-md-4">
+                        <div class="border rounded-3 p-3 h-100">
+                            <div class="text-muted small mb-1">p-value</div>
+                            <div class="fw-semibold">&asymp; 0.000000</div>
+                        </div>
+                    </div>
+                </div>
+
+                <hr class="my-3"/>
+
+                <div class="d-flex align-items-start gap-2">
+                    <span class="badge text-bg-light border">Conclusion</span>
+                    <div>
+                        <div class="fw-semibold">Reject normality -> apply log(Demand + eps)</div>
+                        <div class="text-muted small">
+                            Extremely small p-value suggest non-normality.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-footer text-muted small">
+                JB = 37276.3220, p &asymp; 0.000000, normal = false
+            </div>
+        </div>
+
+        <div class="card my-4">
+            <div class="card-header d-flex align-items-center justify-content-between flex-wrap gap-2">
+                <span class="fw-semibold">Outlier handling</span>
+                <span class="badge bg-secondary">IQR method</span>
+            </div>
+
+            <div class="card-body">
+                <div class="row g-3">
+                    <div class="col-12 col-md-4">
+                        <div class="border rounded-3 p-3 h-100">
+                            <div class="text-muted small mb-1">Removed outliers</div>
+                            <div class="fw-semibold">42</div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-md-4">
+                        <div class="border rounded-3 p-3 h-100">
+                            <div class="text-muted small mb-1">Share of dataset</div>
+                            <div class="fw-semibold">0.48%</div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-md-4">
+                        <div class="border rounded-3 p-3 h-100">
+                            <div class="text-muted small mb-1">Outlier bounds (<span
+                                    class="badge text-bg-light border"
+                                    data-bs-toggle="tooltip"
+                                    data-bs-placement="top"
+                                    title="IQR (Interquartile Range) = Q3 - Q1. Outliers are values outside [Q1 - 1.5·IQR, Q3 + 1.5·IQR]. This method is robust to skewed data and does not assume normality."
+                            >
+  IQR
+</span>)
+                            </div>
+                            <div class="fw-semibold">[-2.552, 0.869]</div>
+                        </div>
+                    </div>
+                </div>
+
+                <hr class="my-3"/>
+
+                <div class="d-flex align-items-start gap-2">
+                    <span class="badge text-bg-light border">Note</span>
+                    <div class="text-muted small">
+                        Values outside the IQR bounds were removed to reduce the influence of extreme observations on
+                        modelling
+                        and distribution analysis.
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-footer text-muted small">
+                Removed 42 outliers (0.48%). Outlier bounds (IQR): [-2.552, 0.869].
+            </div>
+        </div>
+
+        <div class="card my-4">
+            <div class="card-header d-flex align-items-center justify-content-between">
+                <span class="fw-semibold">Feature relevance ranking</span>
+                <span class="badge text-bg-light border">Pearson correlation</span>
+            </div>
+
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <table class="table table-striped table-hover align-middle mb-0">
+                        <thead class="table-light">
+                        <tr>
+                            <th scope="col">Feature</th>
+                            <th scope="col" class="text-end">Pearson r</th>
+                            <th scope="col" class="text-end">|r|</th>
+                            <th scope="col" class="text-end">N pairs</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>hour_of_day</td>
+                            <td class="text-end">0.298</td>
+                            <td class="text-end fw-semibold">0.298</td>
+                            <td class="text-end">8717</td>
+                        </tr>
+
+                        <tr>
+                            <td>shortwave_radiation</td>
+                            <td class="text-end">0.069</td>
+                            <td class="text-end">0.069</td>
+                            <td class="text-end">1660</td>
+                        </tr>
+
+                        <tr>
+                            <td>effective_solar</td>
+                            <td class="text-end">0.051</td>
+                            <td class="text-end">0.051</td>
+                            <td class="text-end">1660</td>
+                        </tr>
+
+                        <tr>
+                            <td>temperature</td>
+                            <td class="text-end">-0.043</td>
+                            <td class="text-end">0.043</td>
+                            <td class="text-end">8717</td>
+                        </tr>
+
+                        <tr>
+                            <td>cloud_cover</td>
+                            <td class="text-end">0.021</td>
+                            <td class="text-end">0.021</td>
+                            <td class="text-end">8717</td>
+                        </tr>
+
+                        <tr>
+                            <td>cooling_index</td>
+                            <td class="text-end">0.019</td>
+                            <td class="text-end">0.019</td>
+                            <td class="text-end">8717</td>
+                        </tr>
+
+                        <tr>
+                            <td>wind_speed_10m</td>
+                            <td class="text-end">0.010</td>
+                            <td class="text-end">0.010</td>
+                            <td class="text-end">8717</td>
+                        </tr>
+
+                        <tr>
+                            <td>is_weekend</td>
+                            <td class="text-end">-0.010</td>
+                            <td class="text-end">0.010</td>
+                            <td class="text-end">8717</td>
+                        </tr>
+
+                        <tr>
+                            <td>pressure</td>
+                            <td class="text-end">0.002</td>
+                            <td class="text-end">0.002</td>
+                            <td class="text-end">8717</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="card-footer text-muted small">
+                Features are ranked by absolute Pearson correlation with demand.
+                Correlation reflects linear dependence only and does not capture nonlinear or lagged effects.
+            </div>
+        </div>
+
+        <div class="d-flex align-items-end justify-content-between flex-wrap gap-2 mb-3">
+            <div>
+                <div class="muted">Filtered Demand Normal Distribution</div>
+            </div>
+            <span class="badge text-bg-light border">GET <span class="kbd">/api/task5/demand/distribution</span></span>
+        </div>
         <div class="card card-soft">
             <div class="card-body">
                 <div class="chart-wrap">
-                    <canvas id="featureRankingChart"></canvas>
+                    <canvas id="demandDistribution"></canvas>
                 </div>
             </div>
         </div>
@@ -612,6 +930,20 @@
                 </div>
             </div>
         </div>
+        <div class="d-flex align-items-end justify-content-between flex-wrap gap-2 mb-3">
+            <div>
+                <div class="muted">Typical Demand Profie</div>
+            </div>
+            <span class="badge text-bg-light border">GET <span class="kbd">/api/task6/typical-profiles</span></span>
+        </div>
+
+        <div class="card card-soft">
+            <div class="card-body">
+                <div class="chart-wrap">
+                    <canvas id="typicalProfileChart"></canvas>
+                </div>
+            </div>
+        </div>
     </div>
 </section>
 
@@ -621,7 +953,26 @@
         <div class="d-flex align-items-end justify-content-between flex-wrap gap-2 mb-3">
             <div>
                 <h2 class="fw-bold mb-1">Task 7 — Statistical Modelling</h2>
-                <div class="muted">ACF & PACF for AR model order selection</div>
+            </div>
+        </div>
+        <div class="d-flex align-items-end justify-content-between flex-wrap gap-2 mb-3">
+            <div>
+                <div class="muted"><span
+                        class="badge text-bg-light border me-1"
+                        data-bs-toggle="tooltip"
+                        data-bs-placement="top"
+                        title="ACF (Autocorrelation Function) measures correlation between a time series and its lagged values. It is used to detect temporal dependence and seasonality. Peaks at specific lags indicate periodic patterns."
+                >
+  ACF
+</span> & <span
+                        class="badge text-bg-light border"
+                        data-bs-toggle="tooltip"
+                        data-bs-placement="top"
+                        title="PACF (Partial Autocorrelation Function) measures the correlation at a given lag after removing the effect of shorter lags. A sharp cutoff after lag p suggests an AR(p) model."
+                >
+  PACF
+</span>for AR model order selection
+                </div>
             </div>
             <div class="d-flex gap-2 flex-wrap">
                 <span class="badge text-bg-light border">GET <span class="kbd">/api/task7/acf</span></span>
@@ -651,6 +1002,112 @@
                 </div>
             </div>
         </div>
+
+        <div class="card my-4">
+            <div class="card-header d-flex align-items-center justify-content-between flex-wrap gap-2">
+                <span class="fw-semibold">Statistical model evaluation</span>
+                <span
+                        class="badge text-bg-light border"
+                        data-bs-toggle="tooltip"
+                        data-bs-placement="top"
+                        title="NRMSE (Normalized Root Mean Square Error) measures forecast accuracy relative to the scale of the data. Lower values indicate better predictive performance."
+                >
+      Metric: NRMSE
+    </span>
+            </div>
+
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <table class="table table-striped table-hover align-middle mb-0">
+                        <thead class="table-light">
+                        <tr>
+                            <th scope="col">Validation setup</th>
+                            <th scope="col">Model</th>
+                            <th scope="col" class="text-end">NRMSE</th>
+                            <th scope="col" class="text-center">Best</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr class="table-group-divider">
+                            <td rowspan="2" class="fw-semibold">
+                                Rolling one-step<br>
+                                <span class="text-muted small">Whole training set</span>
+                            </td>
+                            <td>
+              <span
+                      data-bs-toggle="tooltip"
+                      data-bs-placement="top"
+                      title="AR(1): Autoregressive model using the previous one time step (t-1). Captures short-term dependence only."
+              >
+                AR(1) on diff
+              </span>
+                            </td>
+                            <td class="text-end">0.083470</td>
+                            <td class="text-center"></td>
+                        </tr>
+                        <tr>
+                            <td>
+              <span
+                      data-bs-toggle="tooltip"
+                      data-bs-placement="top"
+                      title="AR(24): Autoregressive model using the value from 24 hours ago (t-24). Captures daily seasonality common in electricity demand."
+              >
+                AR(24) on diff
+              </span>
+                            </td>
+                            <td class="text-end fw-semibold">0.074257</td>
+                            <td class="text-center">
+                                <span class="badge bg-success">Best</span>
+                            </td>
+                        </tr>
+
+                        <!-- Walk-forward -->
+                        <tr class="table-group-divider">
+                            <td rowspan="2" class="fw-semibold">
+                                Walk-forward<br>
+                                <span class="text-muted small">Last week, daily folds, 24h horizon</span>
+                            </td>
+                            <td>
+              <span
+                      data-bs-toggle="tooltip"
+                      data-bs-placement="top"
+                      title="AR(1): Relies only on the most recent observation and cannot capture daily usage cycles."
+              >
+                AR(1) on diff
+              </span>
+                            </td>
+                            <td class="text-end">0.202778</td>
+                            <td class="text-center"></td>
+                        </tr>
+                        <tr>
+                            <td>
+              <span
+                      data-bs-toggle="tooltip"
+                      data-bs-placement="top"
+                      title="AR(24): Uses yesterday’s demand at the same hour, making it suitable for daily periodic patterns."
+              >
+                AR(24) on diff
+              </span>
+                            </td>
+                            <td class="text-end fw-semibold">0.173359</td>
+                            <td class="text-center">
+                                <span class="badge bg-success">Best</span>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="card-footer bg-white d-flex align-items-center justify-content-between flex-wrap gap-2">
+                <div class="text-muted small">
+                    Walk-forward validation is the most realistic evaluation for time-series forecasting.
+                </div>
+                <span class="badge bg-primary">Winner: AR(24) on diff</span>
+            </div>
+        </div>
+
+
     </div>
 </section>
 
@@ -660,18 +1117,148 @@
         <div class="d-flex align-items-end justify-content-between flex-wrap gap-2 mb-3">
             <div>
                 <h2 class="fw-bold mb-1">Task 8 — Machine Learning</h2>
-                <div class="muted">XGBoost forecast (direct strategy)</div>
             </div>
-            <span class="badge text-bg-light border">GET <span class="kbd">/api/task8/forecast/xgboost</span></span>
+
         </div>
 
-        <div class="card card-soft">
-            <div class="card-body">
-                <div class="chart-wrap">
-                    <canvas id="xgbForecastChart"></canvas>
+        <div class="card my-4">
+            <div class="card-header d-flex align-items-center justify-content-between flex-wrap gap-2">
+                <span class="fw-semibold">XGBoost hyperparameters</span>
+                <span class="badge text-bg-light border">Task 8.2</span>
+            </div>
+
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <table class="table table-striped table-hover align-middle mb-0">
+                        <thead class="table-light">
+                        <tr>
+                            <th scope="col">Hyperparameter</th>
+                            <th scope="col">Selected value</th>
+                            <th scope="col">Possible values / range</th>
+                            <th scope="col">Rationale</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>objective</td>
+                            <td><code>reg:squarederror</code></td>
+                            <td class="text-muted">reg:squarederror, reg:absoluteerror, reg:pseudohubererror</td>
+                            <td class="text-muted">
+                                Standard and stable objective for continuous regression tasks
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>num_round</td>
+                            <td>400</td>
+                            <td class="text-muted">100 – 1000+</td>
+                            <td class="text-muted">
+                                Provides sufficient learning iterations while avoiding underfitting
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>learning_rate (<code>eta</code>)</td>
+                            <td>0.05</td>
+                            <td class="text-muted">0.01 – 0.3</td>
+                            <td class="text-muted">
+                                Smaller learning rate improves generalisation and reduces overfitting
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>max_depth</td>
+                            <td>6</td>
+                            <td class="text-muted">3 – 10</td>
+                            <td class="text-muted">
+                                Balances model expressiveness and overfitting risk
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>subsample</td>
+                            <td>0.8</td>
+                            <td class="text-muted">0.5 – 1.0</td>
+                            <td class="text-muted">
+                                Introduces randomness to improve robustness and generalisation
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>colsample_bytree</td>
+                            <td>0.8</td>
+                            <td class="text-muted">0.5 – 1.0</td>
+                            <td class="text-muted">
+                                Reduces overfitting by sampling a subset of features per tree
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>regularisation (<code>lambda</code>)</td>
+                            <td>1.0</td>
+                            <td class="text-muted">0 – 10+</td>
+                            <td class="text-muted">
+                                L2 regularisation stabilises model weights and prevents extreme splits
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
+
+            <div class="card-footer text-muted small">
+                Hyperparameters were selected at random, rather than with tuning.
+            </div>
         </div>
+
+        <div class="card my-4">
+            <div class="card-header d-flex align-items-center justify-content-between flex-wrap gap-2">
+                <span class="fw-semibold">Model performance comparison</span>
+                <span class="badge text-bg-light border">Metric: NRMSE (lower is better)</span>
+            </div>
+
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <table class="table table-striped table-hover align-middle mb-0">
+                        <thead class="table-light">
+                        <tr>
+                            <th scope="col">Model</th>
+                            <th scope="col" class="text-end">NRMSE</th>
+                            <th scope="col">Model characteristics</th>
+                            <th scope="col" class="text-center">Result</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>AR(24)</td>
+                            <td class="text-end">0.173</td>
+                            <td class="text-muted">
+                                Linear autoregressive model capturing daily seasonality (lag 24)
+                            </td>
+                            <td class="text-center"></td>
+                        </tr>
+
+                        <tr>
+                            <td class="fw-semibold">XGBoost</td>
+                            <td class="text-end fw-semibold">0.141</td>
+                            <td class="text-muted">
+                                Nonlinear model capturing interactions between lagged demand and time features
+                            </td>
+                            <td class="text-center">
+                                <span class="badge bg-success">Best</span>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="card-footer bg-white text-muted small">
+                XGBoost outperforms AR(24) by modelling nonlinear effects and feature interactions,
+                while AR(24) is limited to linear daily dependence.
+            </div>
+        </div>
+
     </div>
 </section>
 
@@ -685,6 +1272,134 @@
             </div>
             <span class="badge text-bg-light border">GET <span class="kbd">/api/task9/forecast/compare</span></span>
         </div>
+        <!-- Overall performance table -->
+        <div class="card my-4">
+            <div class="card-header d-flex align-items-center justify-content-between flex-wrap gap-2">
+                <span class="fw-semibold">Overall forecasting performance</span>
+                <span class="badge text-bg-light border">NRMSE (lower is better)</span>
+            </div>
+
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <table class="table table-striped table-hover align-middle mb-0">
+                        <thead class="table-light">
+                        <tr>
+                            <th scope="col">Model</th>
+                            <th scope="col" class="text-end">NRMSE</th>
+                            <th scope="col" class="text-center">Rank</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td class="fw-semibold">AR(24) on diff</td>
+                            <td class="text-end fw-semibold">0.160307</td>
+                            <td class="text-center">
+                                <span class="badge bg-success">Best</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Drift</td>
+                            <td class="text-end">0.162426</td>
+                            <td class="text-center">2</td>
+                        </tr>
+                        <tr>
+                            <td>Naive</td>
+                            <td class="text-end">0.162444</td>
+                            <td class="text-center">3</td>
+                        </tr>
+                        <tr>
+                            <td>XGBoost (direct)</td>
+                            <td class="text-end">0.173890</td>
+                            <td class="text-center">4</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="card-footer text-muted small">
+                AR(24) achieves the lowest overall error, indicating that daily seasonality is the dominant structure in
+                demand.
+            </div>
+        </div>
+
+        <div class="card my-4">
+            <div class="card-header d-flex align-items-center justify-content-between flex-wrap gap-2">
+                <span class="fw-semibold">Per-day forecasting performance</span>
+                <span class="badge text-bg-light border">Walk-forward (24h horizon)</span>
+            </div>
+
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <table class="table table-bordered table-hover align-middle mb-0">
+                        <thead class="table-light">
+                        <tr>
+                            <th scope="col">Day</th>
+                            <th scope="col" class="text-end">AR(24) on diff</th>
+                            <th scope="col" class="text-end">XGBoost (direct)</th>
+                            <th scope="col" class="text-end">Naive</th>
+                            <th scope="col" class="text-end">Drift</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>2014-07-01</td>
+                            <td class="text-end">0.213914</td>
+                            <td class="text-end">0.194871</td>
+                            <td class="text-end">0.241587</td>
+                            <td class="text-end">0.241571</td>
+                        </tr>
+                        <tr>
+                            <td>2014-07-02</td>
+                            <td class="text-end">0.294794</td>
+                            <td class="text-end">0.369280</td>
+                            <td class="text-end">0.336612</td>
+                            <td class="text-end">0.336604</td>
+                        </tr>
+                        <tr class="table-warning">
+                            <td>2014-07-03</td>
+                            <td class="text-end">1.460327</td>
+                            <td class="text-end">1.892956</td>
+                            <td class="text-end fw-semibold">0.320256</td>
+                            <td class="text-end fw-semibold">0.319944</td>
+                        </tr>
+                        <tr>
+                            <td>2014-07-04</td>
+                            <td class="text-end">0.241494</td>
+                            <td class="text-end">1.294612</td>
+                            <td class="text-end">0.458712</td>
+                            <td class="text-end">0.458366</td>
+                        </tr>
+                        <tr>
+                            <td>2014-07-05</td>
+                            <td class="text-end">0.282769</td>
+                            <td class="text-end">1.525952</td>
+                            <td class="text-end">0.312629</td>
+                            <td class="text-end">0.312228</td>
+                        </tr>
+                        <tr>
+                            <td>2014-07-06</td>
+                            <td class="text-end">0.266901</td>
+                            <td class="text-end">1.196502</td>
+                            <td class="text-end">0.308607</td>
+                            <td class="text-end">0.308326</td>
+                        </tr>
+                        <tr>
+                            <td>2014-07-07</td>
+                            <td class="text-end">0.317113</td>
+                            <td class="text-end">0.309662</td>
+                            <td class="text-end fw-semibold">0.306049</td>
+                            <td class="text-end fw-semibold">0.306001</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="card-footer text-muted small">
+                Highlighted days indicate abnormal behaviour where simple baselines outperform advanced models.
+            </div>
+        </div>
 
         <div class="card card-soft">
             <div class="card-body">
@@ -696,49 +1411,261 @@
     </div>
 </section>
 
+<!-- TASK 10 -->
+<section id="task10">
+    <div class="container">
+        <div class="d-flex align-items-end justify-content-between flex-wrap gap-2 mb-3">
+            <div>
+                <h2 class="fw-bold mb-1">Task 10 – Models with Inputs (Features)</h2>
+            </div>
+        </div>
+
+
+        <div class="card my-4">
+            <div class="card-header d-flex align-items-center justify-content-between flex-wrap gap-2">
+                <div>
+                    <div class="fw-semibold">Out-of-sample forecasting performance</div>
+                    <div class="text-muted small">
+                        Rolling-origin, 7 days, 24h horizon, 0h lead
+                    </div>
+                </div>
+                <span class="badge text-bg-light border"><span
+                        class="badge text-bg-light border"
+                        data-bs-toggle="tooltip"
+                        data-bs-placement="top"
+                        title="MAE (Mean Absolute Error) is the average absolute difference between predicted and actual values. It measures typical forecast error in the original units and is less sensitive to extreme outliers than RMSE."
+                >
+  MAE
+</span> &amp; NRMSE (lower is better)</span>
+            </div>
+
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <table class="table table-striped table-hover align-middle mb-0">
+                        <thead class="table-light">
+                        <tr>
+                            <th scope="col">Model</th>
+                            <th scope="col" class="text-end">MAE</th>
+                            <th scope="col" class="text-end">NRMSE</th>
+                            <th scope="col" class="text-center">Comment</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td class="fw-semibold">AR(24)</td>
+                            <td class="text-end fw-semibold">0.154768</td>
+                            <td class="text-end fw-semibold">0.160307</td>
+                            <td class="text-center">
+                                <span class="badge bg-success">Best overall</span>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>ARX(24) + exogenous</td>
+                            <td class="text-end">0.175921</td>
+                            <td class="text-end">0.164967</td>
+                            <td class="text-muted text-center">Exogenous inputs degrade performance</td>
+                        </tr>
+
+                        <tr>
+                            <td>XGBoost (lags)</td>
+                            <td class="text-end">0.204175</td>
+                            <td class="text-end">0.172094</td>
+                            <td class="text-muted text-center">Nonlinear baseline</td>
+                        </tr>
+
+                        <tr>
+                            <td>XGBoost (lags + exogenous)</td>
+                            <td class="text-end">0.189965</td>
+                            <td class="text-end">0.168622</td>
+                            <td class="text-muted text-center">Exogenous features improve ML model</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="card-footer text-muted small">
+                AR(24) remains the strongest model overall, confirming the dominance of daily seasonality
+                in household electricity demand.
+            </div>
+
+
+        </div>
+
+        <div class="card my-4">
+            <div class="card-header d-flex align-items-center justify-content-between flex-wrap gap-2">
+                <div>
+                    <div class="fw-semibold">Impact of exogenous inputs</div>
+                    <div class="text-muted small">Relative improvement compared to baseline models</div>
+                </div>
+                <span class="badge text-bg-light border">Percentage change</span>
+            </div>
+
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <table class="table table-bordered table-hover align-middle mb-0">
+                        <thead class="table-light">
+                        <tr>
+                            <th scope="col">Improved model</th>
+                            <th scope="col">Baseline</th>
+                            <th scope="col" class="text-end">MAE improvement (%)</th>
+                            <th scope="col" class="text-end">NRMSE improvement (%)</th>
+                            <th scope="col" class="text-center">Interpretation</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr class="table-warning">
+                            <td>ARX(24) + exogenous</td>
+                            <td>AR(24)</td>
+                            <td class="text-end">-13.67%</td>
+                            <td class="text-end">-2.91%</td>
+                            <td class="text-muted text-center">
+                                Exogenous variables harm linear model performance
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td class="fw-semibold">XGBoost (lags + exogenous)</td>
+                            <td>XGBoost (lags)</td>
+                            <td class="text-end fw-semibold">+6.96%</td>
+                            <td class="text-end fw-semibold">+2.02%</td>
+                            <td class="text-muted text-center">
+                                Exogenous variables help nonlinear model
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="card-footer text-muted small">
+                Negative values indicate worse performance. Exogenous inputs improve XGBoost but degrade AR-based
+                models.
+            </div>
+        </div>
+
+
+    </div>
+    </div>
+</section>
+
 <!-- TASK 11 -->
 <section id="task11">
     <div class="container">
         <div class="d-flex align-items-end justify-content-between flex-wrap gap-2 mb-3">
             <div>
-                <h2 class="fw-bold mb-1">Task 11 — Battery Optimisation (MILP)</h2>
-                <div class="muted">SOC + cumulative cost comparison (PV_low vs PV_high)</div>
+                <h2 class="fw-bold mb-1">Task 11 — Optimal Control of Storage</h2>
+            </div>
+        </div>
+
+        <div class="card my-4">
+            <div class="card-header d-flex align-items-center justify-content-between flex-wrap gap-2">
+                <div>
+                    <div class="fw-semibold">Battery specifications</div>
+                    <div class="text-muted small">Constraints and efficiencies)</div>
+                </div>
+                <span class="badge text-bg-light border">BatterySpec</span>
+            </div>
+
+            <div class="card-body">
+                <div class="row g-3">
+                    <!-- SOC bar -->
+                    <div class="col-12">
+                        <div class="border rounded-3 p-3">
+                            <div class="d-flex align-items-center justify-content-between flex-wrap gap-2 mb-2">
+                                <div class="fw-semibold">State of charge (SOC)</div>
+                                <span class="badge bg-secondary">Initial: 5.0 kWh (50%)</span>
+                            </div>
+
+                            <div class="d-flex justify-content-between text-muted small mb-1">
+                                <span>Min: 0.0 kWh</span>
+                                <span>Max: 10.0 kWh</span>
+                            </div>
+
+                            <div class="progress" role="progressbar" aria-label="SOC progress" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="height: 14px;">
+                                <div class="progress-bar" style="width: 50%"></div>
+                            </div>
+
+                            <div class="mt-2 text-muted small">
+                                Capacity: <span class="fw-semibold">10.0 kWh</span> • Operating range: <span class="fw-semibold">0.0–10.0 kWh</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Power limits -->
+                    <div class="col-12 col-lg-6">
+                        <div class="border rounded-3 p-3 h-100">
+                            <div class="fw-semibold mb-2">Power limits</div>
+
+                            <div class="d-flex align-items-center justify-content-between mb-2">
+                                <span class="text-muted">Charge limit</span>
+                                <span class="badge bg-primary">5.0 kW</span>
+                            </div>
+                            <div class="progress mb-3" role="progressbar" aria-label="Charge limit" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="height: 10px;">
+                                <div class="progress-bar" style="width: 100%"></div>
+                            </div>
+
+                            <div class="d-flex align-items-center justify-content-between mb-2">
+                                <span class="text-muted">Discharge limit</span>
+                                <span class="badge bg-primary">5.0 kW</span>
+                            </div>
+                            <div class="progress" role="progressbar" aria-label="Discharge limit" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="height: 10px;">
+                                <div class="progress-bar" style="width: 100%"></div>
+                            </div>
+
+                            <div class="mt-2 text-muted small">
+                                Symmetric limits assumed for charging and discharging.
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Efficiencies -->
+                    <div class="col-12 col-lg-6">
+                        <div class="border rounded-3 p-3 h-100">
+                            <div class="fw-semibold mb-2">Efficiencies</div>
+
+                            <div class="d-flex align-items-center justify-content-between mb-2">
+                                <span class="text-muted">Charge efficiency (η<sub>c</sub>)</span>
+                                <span class="badge bg-success">0.95</span>
+                            </div>
+                            <div class="progress mb-3" role="progressbar" aria-label="Charge efficiency" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100" style="height: 10px;">
+                                <div class="progress-bar bg-success" style="width: 95%"></div>
+                            </div>
+
+                            <div class="d-flex align-items-center justify-content-between mb-2">
+                                <span class="text-muted">Discharge efficiency (η<sub>d</sub>)</span>
+                                <span class="badge bg-success">0.95</span>
+                            </div>
+                            <div class="progress" role="progressbar" aria-label="Discharge efficiency" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100" style="height: 10px;">
+                                <div class="progress-bar bg-success" style="width: 95%"></div>
+                            </div>
+
+                            <div class="mt-2 text-muted small">
+                                Round-trip efficiency (η<sub>rt</sub>) ≈ η<sub>c</sub> × η<sub>d</sub> = <span class="fw-semibold">0.9025</span> (~90.25%).
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-footer text-muted small">
+                Battery configuration used: SOC₀ = 5.0 kWh, SOC ∈ [0.0, 10.0] kWh, P<sub>ch</sub> ≤ 5.0 kW, P<sub>dis</sub> ≤ 5.0 kW, η<sub>c</sub>=0.95, η<sub>d</sub>=0.95.
+            </div>
+        </div>
+
+        <div class="d-flex align-items-end justify-content-between flex-wrap gap-2 mb-3">
+            <div>
+                <div class="muted">Cumulative cost comparison (PV_low vs PV_high) NB! export coefficient 1.0 </div>
             </div>
             <div class="d-flex gap-2 flex-wrap">
-                <span class="badge text-bg-light border">GET <span
-                        class="kbd">/api/task11/soc?scenario=pv_low</span></span>
-                <span class="badge text-bg-light border">GET <span
-                        class="kbd">/api/task11/soc?scenario=pv_high</span></span>
                 <span class="badge text-bg-light border">GET <span
                         class="kbd">/api/task11/costs/cumulative</span></span>
                 <span class="badge text-bg-light border">GET <span class="kbd">/api/task11/costs/summary</span></span>
             </div>
         </div>
+        <div class="row g-3 flex-wrap">
 
-        <div class="row g-3">
-            <div class="col-lg-6">
-                <div class="card card-soft">
-                    <div class="card-body">
-                        <h5 class="fw-semibold mb-2">SOC — PV_low</h5>
-                        <div class="chart-wrap">
-                            <canvas id="socLowChart"></canvas>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-6">
-                <div class="card card-soft">
-                    <div class="card-body">
-                        <h5 class="fw-semibold mb-2">SOC — PV_high</h5>
-                        <div class="chart-wrap">
-                            <canvas id="socHighChart"></canvas>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-8">
                 <div class="card card-soft">
                     <div class="card-body">
                         <h5 class="fw-semibold mb-2">Cumulative cost (scenarios)</h5>
@@ -747,15 +1674,27 @@
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="col-lg-4">
                 <div class="card card-soft">
                     <div class="card-body">
                         <h5 class="fw-semibold mb-2">Total cost summary</h5>
                         <div class="chart-wrap">
                             <canvas id="costSummaryChart"></canvas>
                         </div>
+                    </div>
+                </div>
+
+        </div>
+        <div class="d-flex gap-2 flex-wrap">
+                <span class="badge text-bg-light border">GET <span
+                        class="kbd">/api/task11/costs/charge-dischange</span></span>
+        </div>
+        <div class="row g-3">
+            <div class="card card-soft">
+                <div class="card-body">
+                    <h5 class="fw-semibold mb-2">Charge/Dischange</h5>
+                    <div class="chart-wrap">
+                        <canvas id="chargeDischarge"></canvas>
                     </div>
                 </div>
             </div>
@@ -782,19 +1721,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-5">
-                <div class="card card-soft">
-                    <div class="card-body">
-                        <h5 class="fw-semibold">Demo checklist</h5>
-                        <div class="muted mb-2">If something fails, check:</div>
-                        <ol class="mb-0">
-                            <li>Canvas ID exists in HTML</li>
-                            <li>Endpoint returns expected JSON shape</li>
-                            <li>Backend is running on same origin / CORS</li>
-                        </ol>
-                    </div>
-                </div>
-            </div>
+
         </div>
     </div>
 </section>
@@ -802,11 +1729,9 @@
 <footer class="text-center">
     <div class="container">
         <div class="mb-1 fw-semibold">ITS8080 – Energy Informatics · Final Presentation</div>
-        <div class="muted">Interactive Bootstrap + Chart.js template for Spring Boot APIs</div>
     </div>
 </footer>
 
-<!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
 <!-- ===================== CHART FETCH + RENDER (ROBUST) ===================== -->
@@ -886,15 +1811,16 @@
         const minutes = pad(d.getMinutes());
         return `${year}-${month}-${day}T${hours}:${minutes}`;
     }
+
     function datetimeLocalToIsoOffset(el) {
         if (!el || !el.value) return null;
-        el.dataset.time =  new Date(el.value).toISOString();
+        el.dataset.time = new Date(el.value).toISOString();
     }
 
     async function loadAllCharts() {
         // Task 1
         await fetchAndRenderChart("demandChart", "/api/task1/price-demand-pv");
-        
+
         // Task 3
         await fetchAndRenderChart("priceHistogram", "/api/task3/price-histogram");
         await fetchAndRenderChart("demandScatter", "/api/task3/demand-vs-temperature");
@@ -903,26 +1829,26 @@
         await fetchAndRenderChart("imputation", "/api/task4/imputation");
 
         // Task 5
-        await fetchAndRenderBarChart("featureRankingChart", "/api/task5/feature-ranking", "Abs Pearson r");
+        await fetchAndRenderChart("demandDistribution", "/api/task5/demand/distribution");
 
         // Task 6
         await fetchAndRenderChart("decompositionChart", "/api/task6/decomposition");
+        await fetchAndRenderChart("typicalProfileChart", "/api/task6/typical-profiles");
 
         // Task 7
-        await fetchAndRenderBarChart("acfChart", "/api/task7/acf", "ACF");
-        await fetchAndRenderBarChart("pacfChart", "/api/task7/pacf", "PACF");
+        await fetchAndRenderChart("acfChart", "/api/task7/acf", "ACF");
+        await fetchAndRenderChart("pacfChart", "/api/task7/pacf", "PACF");
 
         // Task 8
         await fetchAndRenderChart("xgbForecastChart", "/api/task8/forecast/xgboost");
 
         // Task 9
-        await fetchAndRenderChart("forecastCompareChart", "/api/task9/forecast/compare");
+        await fetchAndRenderChart("forecastCompareChart", "/api/task9/forecasts");
 
         // Task 11
-        await fetchAndRenderChart("socLowChart", "/api/task11/soc?scenario=pv_low");
-        await fetchAndRenderChart("socHighChart", "/api/task11/soc?scenario=pv_high");
         await fetchAndRenderChart("costChart", "/api/task11/costs/cumulative");
-        await fetchAndRenderBarChart("costSummaryChart", "/api/task11/costs/summary", "Total cost");
+        await fetchAndRenderChart("costSummaryChart", "/api/task11/costs/summary");
+        await fetchAndRenderChart("chargeDischarge", "/api/task11/charge-discharge");
 
         let task1Start = document.getElementById("task1-startDate");
         let task1End = document.getElementById("task1-endDate");
@@ -931,11 +1857,11 @@
         let task4End = document.getElementById("task4-endDate");
 
         const startIso = "2013-07-01T00:00:00Z";
-        const endIso   = "2013-07-08T00:00:00Z";
+        const endIso = "2013-07-08T00:00:00Z";
         task1Start.value = offsetIsoToDatetimeLocal(startIso);
-        task1End.value   = offsetIsoToDatetimeLocal(endIso);
+        task1End.value = offsetIsoToDatetimeLocal(endIso);
         task4Start.value = offsetIsoToDatetimeLocal(startIso);
-        task4End.value   = offsetIsoToDatetimeLocal(endIso);
+        task4End.value = offsetIsoToDatetimeLocal(endIso);
 
         document.getElementById('dragNumber').value = 4;
         document.getElementById('dragNumberValue').textContent = '4';
@@ -962,7 +1888,7 @@
         let task4Start = document.getElementById("task4-startDate");
         let task4End = document.getElementById("task4-endDate");
 
-        function updateDemandChart(event){
+        function updateDemandChart(event) {
             const el = event.target;
             datetimeLocalToIsoOffset(el);
             fetchAndRenderChart("demandChart",
@@ -970,7 +1896,7 @@
 
         }
 
-        function updateImputationChart(event){
+        function updateImputationChart(event) {
             const el = event.target;
             datetimeLocalToIsoOffset(el);
             fetchAndRenderChart("imputation",
@@ -979,13 +1905,13 @@
         }
 
         const startIso = "2013-07-01T00:00:00+00:00";
-        const endIso   = "2013-07-08T00:00:00+00:00";
+        const endIso = "2013-07-08T00:00:00+00:00";
         task1Start.value = offsetIsoToDatetimeLocal(startIso);
-        task1End.value   = offsetIsoToDatetimeLocal(endIso);
+        task1End.value = offsetIsoToDatetimeLocal(endIso);
         task1Start.addEventListener("change", updateDemandChart);
         task1End.addEventListener("change", updateDemandChart);
         task4Start.value = offsetIsoToDatetimeLocal(startIso);
-        task4End.value   = offsetIsoToDatetimeLocal(endIso);
+        task4End.value = offsetIsoToDatetimeLocal(endIso);
         task4Start.addEventListener("change", updateImputationChart);
         task4End.addEventListener("change", updateImputationChart);
     });
@@ -1000,7 +1926,7 @@
         if (sel && sel.value !== method) sel.value = method;
     }
 
-    (function(){
+    (function () {
         const slider = document.getElementById('dragNumber');
         const display = document.getElementById('dragNumberValue');
 
@@ -1008,7 +1934,7 @@
 
         function onSliderChange(e) {
             const v = e.target.value;
-            if(display.textContent === v) return;
+            if (display.textContent === v) return;
             display.textContent = v;
             fetchAndRenderChart("demandScatter", `/api/task3/demand-vs-temperature?markerSize=${encodeURIComponent(v)}`);
         }
@@ -1021,8 +1947,8 @@
             v = v >= Number(slider.max) ? Number(slider.min) : v + 1;
             slider.value = v;
             display.textContent = v;
-            slider.dispatchEvent(new Event('input', { bubbles: true }));
-            slider.dispatchEvent(new Event('change', { bubbles: true }));
+            slider.dispatchEvent(new Event('input', {bubbles: true}));
+            slider.dispatchEvent(new Event('change', {bubbles: true}));
         });
     })();
 </script>
